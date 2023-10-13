@@ -44,7 +44,7 @@ app.get('/:uniqueString', async (req, res) => {
     const uniqueString = req.params.uniqueString;
 
     // Find the link in the database.
-    const link = await Link.findOne({ generatedURL: 'https://redir-exdel-li.onrender.com/' + uniqueString });
+    const link = await Link.findOne({ generatedURL: 'https://onrender.com/' + uniqueString });
 
     if (!link) {
         return res.status(404).json({ error: 'Link not found' });
@@ -79,7 +79,7 @@ async function generateUniqueLink() {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
     while (!isUnique) {
-        generatedURL = 'https://redir-exdel-li.onrender.com/' + generateRandomCharacters(8, characters);
+        generatedURL = 'https://onrender.com/' + generateRandomCharacters(8, characters);
         const existingLink = await Link.findOne({ generatedURL });
         if (!existingLink) {
             isUnique = true;
