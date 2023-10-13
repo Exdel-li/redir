@@ -1,4 +1,3 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -26,7 +25,7 @@ app.use(express.json());
 // Express Routes
 app.post('/generate-link', async (req, res) => {
     const originalURL = req.body.originalURL;
-    
+
     // Generate a unique link.
     const generatedURL = await generateUniqueLink();
     const clickCount = 0;
@@ -59,8 +58,18 @@ app.get('/:uniqueString', async (req, res) => {
     link.clickCount++;
     await link.save();
 
-    // Redirect to the original URL.
-    res.redirect(link.originalURL);
+    // Determine the URL to redirect based on click count.
+    let targetURL;
+    if (link.clickCount < 7) {
+        targetURL = 'https://adlogx.wixsite.com/fortin';
+    } else if (link.clickCount < 12) {
+        targetURL = 'https://adlogx.wixsite.com/404error';
+    } else {
+        targetURL = 'https://adlogx.wixsite.com/crogan';
+    }
+
+    // Redirect to the determined target URL.
+    res.redirect(targetURL);
 });
 
 async function generateUniqueLink() {
@@ -88,5 +97,5 @@ function generateRandomCharacters(length, characters) {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is running on port ${5000}`);
+    console.log(`Server is running on port ${port}`);
 });
