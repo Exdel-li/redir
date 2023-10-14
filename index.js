@@ -4,14 +4,14 @@ import app from "./app.js";
 
 (async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/gitsetup")
+        await mongoose.connect("mongodb://0.0.0.0/gitsetup")
         console.log("DB CONNECTED")
 
         const onListening = () => {
             console.log("Listening on PORT 10000");
         }
 
-        app.listen(5000, onListening)
+        app.listen(10000, onListening)
     } catch (error) {
         console.error("error: ", error);
         throw err;
