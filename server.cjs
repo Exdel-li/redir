@@ -16,8 +16,6 @@ mongoose.connect('mongodb+srv://Exdel:<weneedmoeny>@cluster0.klys9qy.mongodb.net
     console.error('Error connecting to MongoDB:', error);
 });
 
-});
-
 const linkSchema = new mongoose.Schema({
     originalURL: String,
     generatedURL: String,
@@ -106,17 +104,4 @@ function generateRandomCharacters(length, characters) {
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-});
-
-const link = await Link.findOne({ generatedURL: 'https://redir-exdel-li.onrender.com/' + uniqueString }).limit(1);
-
-mongoose.connect("mongodb://localhost:27017/gitsetup", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    poolSize: 10, // You can adjust the pool size based on your needs
-});
-
-const link = await Link.findOne({ generatedURL: 'https://redir-exdel-li.onrender.com/' + uniqueString }).catch(error => {
-    console.error("Error finding link:", error);
-    // Handle the error appropriately, e.g., send an error response.
 });
