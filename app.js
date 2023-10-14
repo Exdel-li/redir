@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 10000;
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://Exdel:weneedmoeny@cluster0.klys9qy.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://Exdel-li:weneedmoney@cluster0.el2oftk.mongodb.net/?authSource=Cluster0&authMechanism=SCRAM-SHA-1', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
