@@ -8,7 +8,7 @@ import app from "./app.js";
         console.log("DB CONNECTED")
 
         const onListening = () => {
-            console.log("Listening on PORT 5000");
+            console.log("Listening on PORT 10000");
         }
 
         app.listen(5000, onListening)

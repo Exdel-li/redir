@@ -2,12 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 10000;
 
 // MongoDB Connection
 mongoose.connect('mongodb+srv://Exdel:<weneedmoeny>@cluster0.klys9qy.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+})
+.then(() => {
+    console.log('Connected to MongoDB');
+})
+.catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+});
+
 });
 
 const linkSchema = new mongoose.Schema({
@@ -43,7 +51,7 @@ app.get('/:uniqueString', async (req, res) => {
     const uniqueString = req.params.uniqueString;
 
     // Find the link in the database.
-    const link = await Link.findOne({ generatedURL: 'https://onrender.com/' + uniqueString });
+    const link = await Link.findOne({ generatedURL: 'https://redir-exdel-li.onrender.com/' + uniqueString });
 
     if (!link) {
         return res.status(404).json({ error: 'Link not found' });
@@ -78,7 +86,7 @@ async function generateUniqueLink() {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
     while (!isUnique) {
-        generatedURL = 'https://onrender.com/' + generateRandomCharacters(8, characters);
+        generatedURL = 'https://redir-exdel-li.onrender.com/' + generateRandomCharacters(8, characters);
         const existingLink = await Link.findOne({ generatedURL });
         if (!existingLink) {
             isUnique = true;
@@ -98,4 +106,17 @@ function generateRandomCharacters(length, characters) {
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+});
+
+const link = await Link.findOne({ generatedURL: 'https://redir-exdel-li.onrender.com/' + uniqueString }).limit(1);
+
+mongoose.connect("mongodb://localhost:27017/gitsetup", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    poolSize: 10, // You can adjust the pool size based on your needs
+});
+
+const link = await Link.findOne({ generatedURL: 'https://redir-exdel-li.onrender.com/' + uniqueString }).catch(error => {
+    console.error("Error finding link:", error);
+    // Handle the error appropriately, e.g., send an error response.
 });

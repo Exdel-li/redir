@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 10000;
 
 // MongoDB Connection
 mongoose.connect('mongodb+srv://Exdel:<weneedmoeny>@cluster0.klys9qy.mongodb.net/?retryWrites=true&w=majority', {
@@ -44,7 +44,7 @@ app.get('/:uniqueString', async (req, res) => {
     const uniqueString = req.params.uniqueString;
 
     // Find the link in the database.
-    const link = await Link.findOne({ generatedURL: 'https://onrender.com/' + uniqueString });
+    const link = await Link.findOne({ generatedURL: 'https://redir-exdel-li.onrender.com/' + uniqueString });
 
     if (!link) {
         return res.status(404).json({ error: 'Link not found' });
@@ -79,7 +79,7 @@ async function generateUniqueLink() {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
     while (!isUnique) {
-        generatedURL = 'https://onrender.com/' + generateRandomCharacters(8, characters);
+        generatedURL = 'https://redir-exdel-li.onrender.com/' + generateRandomCharacters(8, characters);
         const existingLink = await Link.findOne({ generatedURL });
         if (!existingLink) {
             isUnique = true;
@@ -103,7 +103,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-    console.log(`Listening on PORT ${port}`);
+    console.log(`Listening on PORT ${10000}`);
 });
 
 export default app;
